@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Pattern Analysis | ML Project</title>
+    <meta name="description" content="Identify air pollution patterns and analyze air quality trends using interactive visualizations and machine learning models.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 1. HEADER / NAVBAR -->
+    <header class="navbar-header">
+        <nav class="navbar container">
+            <a href="#home" class="logo">
+                <i class="fa-solid fa-wind logo-icon"></i>
+                <span class="logo-text">Air Quality <span>Analysis</span></span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="nav-item"><a href="#dashboard" class="nav-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li class="nav-item"><a href="#analysis" class="nav-link"><i class="fa-solid fa-magnifying-glass-chart"></i> Analysis</a></li>
+                <li class="nav-item"><a href="#patterns" class="nav-link"><i class="fa-solid fa-brain"></i> Patterns</a></li>
+                <li class="nav-item"><a href="#prediction" class="nav-link"><i class="fa-solid fa-robot"></i> Prediction</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link"><i class="fa-solid fa-circle-info"></i> About</a></li>
+            </ul>
+
+            <div class="mobile-toggle" id="mobileToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. HERO SECTION -->
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="hero-badge"><i class="fa-solid fa-leaf"></i> Machine Learning Project</span>
+                    <h1 class="hero-title">Air Quality Pattern Analysis</h1>
+                    <p class="hero-subtitle">
+                        Identify pollution patterns and understand air quality trends using data analysis and machine learning. Explore real-time simulated environmental insights across major cities.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#dashboard" class="btn btn-primary">
+                            <i class="fa-solid fa-chart-simple"></i> View Dashboard
+                        </a>
+                        <a href="#analysis" class="btn btn-secondary">
+                            <i class="fa-solid fa-compass"></i> Explore Analysis
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-graphic">
+                    <div class="hero-card-floating main-hero-card">
+                        <div class="hero-card-header">
+                            <div class="hero-card-icon"><i class="fa-solid fa-smog"></i></div>
+                            <div>
+                                <span class="hero-card-label">Current Air Index</span>
+                                <h3 id="heroAqiVal">142 AQI</h3>
+                            </div>
+                        </div>
+                        <div class="hero-card-status status-unhealthy-sensitive" id="heroAqiStatus">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Unhealthy for Sensitive Groups
+                        </div>
+                        <div class="hero-min-chart">
+                            <div class="bar-fill" style="height: 60%"></div>
+                            <div class="bar-fill" style="height: 80%"></div>
+                            <div class="bar-fill" style="height: 45%"></div>
+                            <div class="bar-fill" style="height: 90%"></div>
+                            <div class="bar-fill" style="height: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. LOCATION SELECTOR & SUMMARY BAR -->
+        <section class="location-bar-section">
+            <div class="container">
+                <div class="location-bar-card">
+                    <div class="location-selector-wrapper">
+                        <label for="locationSelect" class="location-label">
+                            <i class="fa-solid fa-location-dot"></i> Select Location:
+                        </label>
+                        <select id="locationSelect" class="location-dropdown">
+                            <option value="Chennai" selected>Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Madurai">Madurai</option>
+                            <option value="Salem">Salem</option>
+                            <option value="Tiruchirappalli">Tiruchirappalli</option>
+                        </select>
+                    </div>
+                    <div class="location-info">
+                        <span><i class="fa-solid fa-clock"></i> Last Updated: <strong id="lastUpdatedTime">Today, 08:00 AM</strong></span>
+                        <span><i class="fa-solid fa-city"></i> Region: <strong id="selectedCityName">Chennai Central</strong></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. DASHBOARD SECTION (KPI CARDS) -->
+        <section id="dashboard" class="dashboard-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> Live Air Quality Dashboard</h2>
+                    <p class="section-subtitle">Real-time breakdown of major air pollutants and current Air Quality Index (AQI)</p>
+                </div>
+
+                <!-- KPI Grid -->
+                <div class="kpi-grid">
+                    <!-- Main AQI Card -->
+                    <div class="kpi-card kpi-card-main">
+                        <div class="kpi-icon-wrapper main-aqi-icon">
+                            <i class="fa-solid fa-cloud-sun font-xl"></i>
+                        </div>
+                        <div class="kpi-details">
+                            <span class="kpi-title">Air Quality Index</span>
+                            <div class="kpi-value-group">
+                                <h2 class="kpi-value" id="kpiAqi">142</h2>
+                                <span class="kpi-unit">AQI</span>
+                            </div>
+                            <span class="aqi-badge status-unhealthy-sensitive" id="kpiAqiStatus">Unhealthy</span>
+                        </div>
+                    </div>
+
+                    <!-- PM2.5 Card -->
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">PM2.5</span>
+                            <i class="fa-solid fa-dust kpi-icon"></i>
+                        </div>
+                        <div class="kpi-value-group">
+                            <h3 class="kpi-value" id="kpiPm25">78</h3>
+                            <span class="kpi-unit">µg/m³</span>
+                        </div>
+                        <p class="kpi-desc">Fine Particulate Matter</p>
+                    </div>
+
+                    <!-- PM10 Card -->
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">PM10</span>
+                            <i class="fa-solid fa-smog kpi-icon"></i>
+                        </div>
+                        <div class="kpi-value-group">
+                            <h3 class="kpi-value" id="kpiPm10">124</h3>
+                            <span class="kpi-unit">µg/m³</span>
+                        </div>
+                        <p class="kpi-desc">Coarse Particulate Matter</p>
+                    </div>
+
+                    <!-- CO Card -->
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">CO</span>
+                            <i class="fa-solid fa-car-side kpi-icon"></i>
+                        </div>
+                        <div class="kpi-value-group">
+                            <h3 class="kpi-value" id="kpiCo">1.8</h3>
+                            <span class="kpi-unit">mg/m³</span>
+                        </div>
+                        <p class="kpi-desc">Carbon Monoxide</p>
+                    </div>
+
+                    <!-- NO2 Card -->
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">NO2</span>
+                            <i class="fa-solid fa-industry kpi-icon"></i>
+                        </div>
+                        <div class="kpi-value-group">
+                            <h3 class="kpi-value" id="kpiNo2">42</h3>
+                            <span class="kpi-unit">µg/m³</span>
+                        </div>
+                        <p class="kpi-desc">Nitrogen Dioxide</p>
+                    </div>
+
+                    <!-- O3 Card -->
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">O3</span>
+                            <i class="fa-solid fa-sun kpi-icon"></i>
+                        </div>
+                        <div class="kpi-value-group">
+                            <h3 class="kpi-value" id="kpiO3">56</h3>
+                            <span class="kpi-unit">µg/m³</span>
+                        </div>
+                        <p class="kpi-desc">Ozone Level</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 & 5. ANALYSIS SECTION (CHARTS) -->
+        <section id="analysis" class="analysis-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Pollutant & Trend Analysis</h2>
+                    <p class="section-subtitle">Visualizing weekly trends and individual pollutant distributions</p>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- 4. Weekly Trend Line Chart -->
+                    <div class="chart-card chart-card-wide">
+                        <div class="chart-card-header">
+                            <div>
+                                <h3 class="chart-title">Air Quality Trend (Weekly)</h3>
+                                <p class="chart-sub">AQI values from Monday through Sunday</p>
+                            </div>
+                            <div class="chart-tag"><i class="fa-solid fa-calendar-week"></i> 7-Day View</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 5. Pollutant Breakdown Chart -->
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div>
+                                <h3 class="chart-title">Pollutant Analysis</h3>
+                                <p class="chart-sub">Concentration comparison of pollutants</p>
+                            </div>
+                            <div class="chart-tag"><i class="fa-solid fa-vial"></i> Distribution</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="pollutantChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 7. Time-based Hourly Analysis Chart -->
+                    <div class="chart-card chart-card-wide">
+                        <div class="chart-card-header">
+                            <div>
+                                <h3 class="chart-title">Time-Based Pollution Analysis</h3>
+                                <p class="chart-sub">Daily AQI fluctuations (12 AM to 8 PM)</p>
+                            </div>
+                            <div class="chart-tag"><i class="fa-solid fa-clock-rotate-left"></i> Hourly Dynamics</div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="timeBasedChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. POLLUTION PATTERNS SECTION -->
+        <section id="patterns" class="patterns-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> Identified Pollution Patterns</h2>
+                    <p class="section-subtitle">Key insights generated from exploratory data analysis (EDA)</p>
+                </div>
+
+                <div class="patterns-grid">
+                    <!-- Pattern Card 1 -->
+                    <div class="pattern-card">
+                        <div class="pattern-icon bg-warning-light">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
+                        <h3 class="pattern-title">Traffic Hours Peak</h3>
+                        <p class="pattern-desc">
+                            PM2.5 and NO2 levels spike significantly during morning (7 AM - 9 AM) and evening (5 PM - 8 PM) commute hours due to vehicular exhaust.
+                        </p>
+                    </div>
+
+                    <!-- Pattern Card 2 -->
+                    <div class="pattern-card">
+                        <div class="pattern-icon bg-success-light">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <h3 class="pattern-title">Weekend Drop</h3>
+                        <p class="pattern-desc">
+                            Weekend pollution levels show a 15% to 25% reduction compared to weekdays as commercial transport and office commutes decrease.
+                        </p>
+                    </div>
+
+                    <!-- Pattern Card 3 -->
+                    <div class="pattern-card">
+                        <div class="pattern-icon bg-danger-light">
+                            <i class="fa-solid fa-industry"></i>
+                        </div>
+                        <h3 class="pattern-title">Industrial PM10 Concentration</h3>
+                        <p class="pattern-desc">
+                            Industrial and manufacturing zones exhibit higher PM10 concentration throughout the day, relatively independent of traffic hours.
+                        </p>
+                    </div>
+
+                    <!-- Pattern Card 4 -->
+                    <div class="pattern-card">
+                        <div class="pattern-icon bg-info-light">
+                            <i class="fa-solid fa-temperature-arrow-down"></i>
+                        </div>
+                        <h3 class="pattern-title">Night Atmospheric Inversion</h3>
+                        <p class="pattern-desc">
+                            Lower ambient temperatures during late night hours trap particulate matter closer to the ground, causing elevated AQI around 4 AM.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. AQI CLASSIFICATION TABLE SECTION -->
+        <section class="classification-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-list-check"></i> AQI Standard Classification</h2>
+                    <p class="section-subtitle">Health categories and color designations established by Environmental Standards</p>
+                </div>
+
+                <div class="classification-wrapper">
+                    <div class="table-responsive">
+                        <table class="classification-table">
+                            <thead>
+                                <tr>
+                                    <th>AQI Range</th>
+                                    <th>Category</th>
+                                    <th>Health Impact & Meaning</th>
+                                    <th>Current Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="row-good">
+                                    <td><span class="range-badge badge-good">0 – 50</span></td>
+                                    <td class="font-bold text-good">Good</td>
+                                    <td>Air quality is considered satisfactory, and air pollution poses little or no risk.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                                <tr id="row-moderate">
+                                    <td><span class="range-badge badge-moderate">51 – 100</span></td>
+                                    <td class="font-bold text-moderate">Moderate</td>
+                                    <td>Air quality is acceptable; however, there may be risk for some unusually sensitive people.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                                <tr id="row-sensitive">
+                                    <td><span class="range-badge badge-sensitive">101 – 150</span></td>
+                                    <td class="font-bold text-sensitive">Unhealthy for Sensitive Groups</td>
+                                    <td>Members of sensitive groups may experience health effects. General public is less likely affected.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                                <tr id="row-unhealthy">
+                                    <td><span class="range-badge badge-unhealthy">151 – 200</span></td>
+                                    <td class="font-bold text-unhealthy">Unhealthy</td>
+                                    <td>Everyone may begin to experience health effects; sensitive groups may experience serious effects.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                                <tr id="row-very-unhealthy">
+                                    <td><span class="range-badge badge-very-unhealthy">201 – 300</span></td>
+                                    <td class="font-bold text-very-unhealthy">Very Unhealthy</td>
+                                    <td>Health alert: everyone may experience more serious health effects.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                                <tr id="row-hazardous">
+                                    <td><span class="range-badge badge-hazardous">301 – 500</span></td>
+                                    <td class="font-bold text-hazardous">Hazardous</td>
+                                    <td>Health warning of emergency conditions. The entire population is likely to be affected.</td>
+                                    <td class="status-col"><span class="status-pill hide">Selected</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. ML PREDICTION PLACEHOLDER -->
+        <section id="prediction" class="prediction-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Machine Learning Pollution Prediction</h2>
+                    <p class="section-subtitle">Interactive frontend interface ready for future Python ML model integration</p>
+                </div>
+
+                <div class="prediction-container">
+                    <div class="prediction-card">
+                        <form id="predictionForm" onsubmit="return false;">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="predLocation"><i class="fa-solid fa-location-dot"></i> Select Location</label>
+                                    <select id="predLocation" class="form-control" required>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Coimbatore">Coimbatore</option>
+                                        <option value="Madurai">Madurai</option>
+                                        <option value="Salem">Salem</option>
+                                        <option value="Tiruchirappalli">Tiruchirappalli</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="predDate"><i class="fa-solid fa-calendar-days"></i> Select Date</label>
+                                    <input type="date" id="predDate" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <button type="button" id="predictBtn" class="btn btn-primary btn-block">
+                                <i class="fa-solid fa-bolt"></i> Predict Air Pollution
+                            </button>
+                        </form>
+
+                        <div id="predictionResult" class="prediction-result hidden">
+                            <div class="result-header">
+                                <span><i class="fa-solid fa-microchip"></i> Prediction Result</span>
+                                <span class="result-time" id="resultTimestamp">Just now</span>
+                            </div>
+                            <div class="result-body">
+                                <div class="predicted-aqi-box">
+                                    <span class="pred-label">Predicted AQI</span>
+                                    <h2 class="pred-value" id="predictedAqiVal">156</h2>
+                                </div>
+                                <div class="predicted-status-box">
+                                    <span class="pred-label">Prediction Status</span>
+                                    <div class="status-badge status-unhealthy" id="predictedStatusVal">Unhealthy</div>
+                                </div>
+                            </div>
+                            <div class="confidence-bar-wrapper">
+                                <div class="confidence-info">
+                                    <span>Model Confidence: <strong>94.2%</strong></span>
+                                    <span>Algorithm: <strong>Random Forest Regressor</strong></span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 94.2%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ml-note">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span><strong>Backend Integration Note:</strong> ML prediction model will be connected in the backend later using REST API (Python Flask / FastAPI).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. DATA TABLE -->
+        <section class="table-section section-padding bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-table"></i> Historical Air Quality Dataset</h2>
+                    <p class="section-subtitle">Sample historical records collected for pattern modeling</p>
+                </div>
+
+                <div class="table-controls">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="tableSearch" placeholder="Search by city or status..." class="form-control">
+                    </div>
+                    <div class="table-info-badge">
+                        Showing <span id="recordCount">10</span> sample records
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="data-table" id="aqiDataTable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                    <th>AQI</th>
+                                    <th>PM2.5 (µg/m³)</th>
+                                    <th>PM10 (µg/m³)</th>
+                                    <th>CO (mg/m³)</th>
+                                    <th>NO2 (µg/m³)</th>
+                                    <th>O3 (µg/m³)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Sample JavaScript dynamically populates rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <div class="about-card">
+                    <div class="about-content">
+                        <span class="hero-badge"><i class="fa-solid fa-graduation-cap"></i> Academic Project</span>
+                        <h2 class="about-title">About the Machine Learning Project</h2>
+                        <p class="about-text">
+                            The <strong>“Air Quality Pattern Analysis”</strong> project aims to analyze atmospheric pollution data, detect recurring air quality patterns across urban centers, and provide future prediction capabilities. By isolating key meteorological and traffic variables, machine learning algorithms can accurately forecast environmental risks and assist policymakers in taking proactive measures.
+                        </p>
+                        <div class="about-features">
+                            <div class="feature-item">
+                                <i class="fa-solid fa-square-check feature-icon"></i>
+                                <span>Exploratory Data Analysis (EDA)</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-square-check feature-icon"></i>
+                                <span>Multi-pollutant Tracking</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-square-check feature-icon"></i>
+                                <span>Time-series Forecasting Ready</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fa-solid fa-square-check feature-icon"></i>
+                                <span>Responsive Dashboard UI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-author-card">
+                        <div class="author-avatar">
+                            <i class="fa-solid fa-user-astronaut"></i>
+                        </div>
+                        <h3>SANTHOSH KUMAR S</h3>
+                        <p class="author-role">Project Developer</p>
+                        <div class="author-badges">
+                            <span class="badge-tag"><i class="fa-solid fa-code"></i> Frontend</span>
+                            <span class="badge-tag"><i class="fa-solid fa-brain"></i> Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 15. FOOTER -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fa-solid fa-wind logo-icon"></i>
+                    <span class="logo-text">Air Quality <span>Analysis</span></span>
+                </div>
+                <p class="footer-desc">Identify pollution patterns and understand air quality trends using data analysis and machine learning.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#analysis">Analysis</a></li>
+                    <li><a href="#prediction">Pollution Prediction</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-project">
+                <h4 class="footer-heading">Project Info</h4>
+                <p><strong>Title:</strong> Air Quality Pattern Analysis</p>
+                <p><strong>Scope:</strong> Machine Learning Project</p>
+                <p><strong>Developer:</strong> SANTHOSH KUMAR S</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Air Quality Pattern Analysis. Developed by <strong>SANTHOSH KUMAR S</strong>.</p>
+                <div class="footer-status-pill">
+                    <span class="dot"></span> Frontend Mode (Mock Data)
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

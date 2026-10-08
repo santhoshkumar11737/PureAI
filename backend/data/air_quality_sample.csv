@@ -1,0 +1,61 @@
+date,location,aqi,pm25,pm10,co,no2,o3,status
+2026-09-01,Chennai,142,78,124,1.8,42,56,Unhealthy for Sensitive Groups
+2026-09-02,Chennai,148,82,130,1.9,45,58,Unhealthy for Sensitive Groups
+2026-09-03,Chennai,135,74,118,1.7,40,52,Unhealthy for Sensitive Groups
+2026-09-04,Chennai,155,86,138,2.1,48,62,Unhealthy
+2026-09-05,Chennai,130,70,112,1.6,38,50,Unhealthy for Sensitive Groups
+2026-09-06,Chennai,122,65,106,1.5,35,46,Unhealthy for Sensitive Groups
+2026-09-07,Chennai,118,62,102,1.4,33,44,Unhealthy for Sensitive Groups
+2026-09-08,Chennai,150,83,132,2.0,46,60,Unhealthy for Sensitive Groups
+2026-09-09,Chennai,162,90,144,2.2,52,65,Unhealthy
+2026-09-10,Chennai,138,75,120,1.7,41,54,Unhealthy for Sensitive Groups
+2026-09-11,Chennai,145,80,126,1.8,44,57,Unhealthy for Sensitive Groups
+2026-09-12,Chennai,128,68,110,1.5,37,48,Unhealthy for Sensitive Groups
+2026-09-01,Coimbatore,68,24,52,0.8,22,35,Moderate
+2026-09-02,Coimbatore,62,21,48,0.7,20,32,Moderate
+2026-09-03,Coimbatore,55,18,42,0.6,18,28,Moderate
+2026-09-04,Coimbatore,72,26,56,0.9,24,38,Moderate
+2026-09-05,Coimbatore,60,20,45,0.7,19,30,Moderate
+2026-09-06,Coimbatore,48,15,38,0.5,15,25,Good
+2026-09-07,Coimbatore,42,12,34,0.4,14,22,Good
+2026-09-08,Coimbatore,65,23,50,0.8,21,34,Moderate
+2026-09-09,Coimbatore,75,28,58,0.9,25,40,Moderate
+2026-09-10,Coimbatore,70,25,54,0.8,23,36,Moderate
+2026-09-11,Coimbatore,58,19,44,0.6,18,31,Moderate
+2026-09-12,Coimbatore,50,16,40,0.5,16,26,Good
+2026-09-01,Madurai,95,35,70,1.1,30,40,Moderate
+2026-09-02,Madurai,88,32,65,1.0,28,37,Moderate
+2026-09-03,Madurai,92,34,68,1.1,29,39,Moderate
+2026-09-04,Madurai,105,40,78,1.3,34,45,Unhealthy for Sensitive Groups
+2026-09-05,Madurai,98,36,72,1.2,31,42,Moderate
+2026-09-06,Madurai,82,29,60,0.9,26,34,Moderate
+2026-09-07,Madurai,78,27,56,0.8,25,32,Moderate
+2026-09-08,Madurai,100,38,74,1.2,32,43,Moderate
+2026-09-09,Madurai,112,43,82,1.4,36,47,Unhealthy for Sensitive Groups
+2026-09-10,Madurai,90,33,66,1.0,29,38,Moderate
+2026-09-11,Madurai,96,35,71,1.1,30,41,Moderate
+2026-09-12,Madurai,85,30,62,0.9,27,35,Moderate
+2026-09-01,Salem,165,88,145,2.1,54,62,Unhealthy
+2026-09-02,Salem,172,92,152,2.3,58,66,Unhealthy
+2026-09-03,Salem,158,84,138,2.0,50,58,Unhealthy
+2026-09-04,Salem,180,96,160,2.4,62,70,Unhealthy
+2026-09-05,Salem,160,85,140,2.0,52,60,Unhealthy
+2026-09-06,Salem,145,78,128,1.8,46,54,Unhealthy for Sensitive Groups
+2026-09-07,Salem,140,75,122,1.7,44,51,Unhealthy for Sensitive Groups
+2026-09-08,Salem,168,90,148,2.2,56,64,Unhealthy
+2026-09-09,Salem,185,98,165,2.5,64,72,Unhealthy
+2026-09-10,Salem,162,86,142,2.1,53,61,Unhealthy
+2026-09-11,Salem,170,91,150,2.2,57,65,Unhealthy
+2026-09-12,Salem,152,81,134,1.9,48,56,Unhealthy
+2026-09-01,Tiruchirappalli,115,48,89,1.4,38,48,Unhealthy for Sensitive Groups
+2026-09-02,Tiruchirappalli,120,51,94,1.5,40,50,Unhealthy for Sensitive Groups
+2026-09-03,Tiruchirappalli,108,44,83,1.3,35,44,Unhealthy for Sensitive Groups
+2026-09-04,Tiruchirappalli,128,55,100,1.6,43,54,Unhealthy for Sensitive Groups
+2026-09-05,Tiruchirappalli,110,45,85,1.3,36,45,Unhealthy for Sensitive Groups
+2026-09-06,Tiruchirappalli,98,39,76,1.1,31,40,Moderate
+2026-09-07,Tiruchirappalli,92,36,70,1.0,29,37,Moderate
+2026-09-08,Tiruchirappalli,118,50,91,1.4,39,49,Unhealthy for Sensitive Groups
+2026-09-09,Tiruchirappalli,132,57,104,1.7,45,56,Unhealthy for Sensitive Groups
+2026-09-10,Tiruchirappalli,112,46,87,1.3,37,46,Unhealthy for Sensitive Groups
+2026-09-11,Tiruchirappalli,122,52,95,1.5,41,51,Unhealthy for Sensitive Groups
+2026-09-12,Tiruchirappalli,105,42,80,1.2,34,42,Unhealthy for Sensitive Groups

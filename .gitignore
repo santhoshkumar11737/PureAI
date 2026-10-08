@@ -1,0 +1,24 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Artifacts
+.DS_Store
+Thumbs.db
+
+# Logs & Temporary Files
+*.log
+scratch/
