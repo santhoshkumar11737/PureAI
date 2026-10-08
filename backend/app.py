@@ -426,6 +426,8 @@ def internal_error(error):
 
 
 if __name__ == '__main__':
-    print("Starting Flask Air Quality API on http://127.0.0.1:5000 ...")
-    print("Swagger UI Documentation available at http://127.0.0.1:5000/apidocs/")
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    print(f"Starting Flask Air Quality API on http://0.0.0.0:{port} ...")
+    print(f"Swagger UI Documentation available at http://0.0.0.0:{port}/apidocs/")
+    app.run(host='0.0.0.0', port=port, debug=False)
