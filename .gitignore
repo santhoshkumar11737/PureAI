@@ -22,3 +22,17 @@ Thumbs.db
 # Logs & Temporary Files
 *.log
 scratch/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# ML Model binaries (large files – regenerate via train_model.py)
+backend/model/*.pkl
+*.pkl
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
